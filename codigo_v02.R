@@ -47,6 +47,7 @@ library(readxl)
 dados <- read_excel("data/Dados Fapesb.xlsx")
 names(dados) <- c('Ano', 'Gasto', 'Número de Bolsas')
 nomes <- names(dados)
+dados %<>% mutate(`Gasto`=`Gasto`/1000000) #Reorganizando a escala dos dados
 ##  Perguntas e titulos 
 T_ST_P_No_CIENCTEC <- read_csv("data/TEMA_SUBTEMA_P_No - CIENCIATECNOLOGIA.csv")
 
@@ -113,7 +114,7 @@ texto<-paste('{"title":{"text":"',titulo,
              '"dataView":{"readOnly":false},',
              '"restore":{},"saveAsImage":{}}},"legend":{"show":true,"top":"bottom"},"xAxis":{"type":"category",',
              '"data":',data_axis,'},',
-             '"yAxis":{"type":"value","axisLabel":{"formatter":"R$ {value}"}},',
+             '"yAxis":{"type":"value","axisLabel":{"formatter":"R${value}M"}},',
              '"series":[{"name":"',nomes[2],'","data":',data_serie,',',
              '"type":"line","color":"',corsec_recossa_azul[1],'","showBackground":true,',
              '"backgroundStyle":{"color":"rgba(180, 180, 180, 0.2)"},"symbol":"',simbolo_linhas[1],
