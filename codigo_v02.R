@@ -47,7 +47,7 @@ library(readxl)
 dados <- read_excel("data/Dados Fapesb.xlsx")
 names(dados) <- c('Ano', 'Gasto', 'Número de Bolsas')
 nomes <- names(dados)
-dados %<>% mutate(`Gasto`=`Gasto`/1000000) #Reorganizando a escala dos dados
+dados %<>% mutate(`Gasto`=round(`Gasto`/1000000)) #Reorganizando a escala dos dados
 ##  Perguntas e titulos 
 T_ST_P_No_CIENCTEC <- read_csv("data/TEMA_SUBTEMA_P_No - CIENCIATECNOLOGIA.csv")
 
@@ -108,7 +108,7 @@ data_serie <- paste('[',gsub(' ',',',
 texto<-paste('{"title":{"text":"',titulo,
              '","subtext":"',subtexto,
              '","sublink":"',link,'"},',
-             '"tooltip":{"trigger":"axis"},',
+             '"tooltip":{"trigger":"item","responsive":"true","position":"top","formatter":"R$ {c0} M"},',
              '"toolbox":{"left":"center","orient":"horizontal","itemSize":20,"top":20,"show":true,',
              '"feature":{"dataZoom":{"yAxisIndex":"none"},',
              '"dataView":{"readOnly":false},',
