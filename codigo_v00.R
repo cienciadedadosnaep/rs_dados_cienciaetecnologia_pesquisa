@@ -47,6 +47,10 @@ library(readxl)
 dados <- read_excel("data/bolsas pós.xlsx")
 names(dados)
 nomes <- names(dados)
+dados %<>% mutate(`Mestrado`=round(`Mestrado`/1000,1))
+dados %<>% mutate(`Doutorado`=round(`Doutorado`/1000,1))
+
+
 ##  Perguntas e titulos 
 T_ST_P_No_CIENCTEC <- read_csv("data/TEMA_SUBTEMA_P_No - CIENCIATECNOLOGIA.csv")
 
@@ -111,13 +115,14 @@ data_serie1 <- paste('[',gsub(' ',',',
 texto<-paste('{"title":{"text":"',titulo,
              '","subtext":"',subtexto,
              '","sublink":"',link,'"},',
-             '"tooltip":{"trigger":"axis"},',
+             '"tooltip":{"trigger":"item","responsive":"true","position":"top","formatter":"{b0}: {c0} mil"},',
              '"toolbox":{"left":"center","orient":"horizontal","itemSize":20,"top":20,"show":true,',
              '"feature":{"dataZoom":{"yAxisIndex":"none"},',
              '"dataView":{"readOnly":false},',
-             '"restore":{},"saveAsImage":{}}},"legend":{"show":true,"top":"bottom"},"xAxis":{"type":"category",',
+             '"restore":{},"saveAsImage":{}}},"legend":{"show":true,"bottom":30},"grid":{"bottom":80},"xAxis":{"type":"category",',
              '"data":',data_axis,'},',
-             '"yAxis":{"type":"value","axisLabel":{"formatter":"{value}"}},',
+             '"yAxis":{"type":"value","axisLabel":{"formatter":"{value}mil"}},',
+             '"graphic":[{"type":"text","left":"center","top":"bottom","z":100, "style":{"fill":"gray","text":"Obs: Ponto é separador decimal", "font":"8px sans-srif","fontSize":12}}],',
              '"series":[{"name":"',nomes[2],'","data":',data_serie,',',
              '"type":"bar","color":"',corsec_recossa_azul[2],'","showBackground":true,',
              '"backgroundStyle":{"color":"rgba(180, 180, 180, 0.2)"},"symbol":"',simbolo_linhas[1],
